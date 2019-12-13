@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Ciudad";
+}
+
+@if (ViewBag.distrito != null)
+{
+    foreach (var a in @ViewBag.distrito)
+    {
+        <a href="/Local/Id/@a.Idlocal">
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@a.Nombre</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@a.Ciudad</h6>
+                    <p class="card-title">@a.Direccion</p>
+                </div>
+            </div>
+        </a>
+    }
+
+
+}
+else
+{
+
+}

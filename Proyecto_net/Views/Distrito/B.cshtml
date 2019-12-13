@@ -1,0 +1,53 @@
+﻿@if (ViewBag.locales != null)
+{
+    <div class="card-deck row">
+        @foreach (var local in @ViewBag.locales)
+        {
+            <div class="col-xs-12 col-sm-6 col-lg-4 mt-4">
+                <a href="/Local/Id/@local.Idlocal">
+                    <div class="card-local">
+                        <div class="card-local-content">
+                            <div class="card-local-image-holder">
+                                @foreach (var item in local.Imagen)
+                                {
+                                    <img class="card-local-image" src=@item.Url />
+                                }
+
+                            </div>
+                            <div class="card-local-info">
+                                <div class="card-local-info-nombre">
+                                    <span class="name">@local.Nombre</span>
+                                </div>
+                                <span class="card-local-info-categoria">@local.Categoria</span>
+                                <span class="card-local-info-direccion">@local.Direccion</span>
+                                <span class="card-local-info-barrio">@local.Barrio</span>
+
+                                <div class="card-local-info-valoracion">
+                                    @if (ViewBag.valoraciones != null)
+                                    {
+                                        var values = ViewBag.valoraciones[local.Idlocal].Split(" ");
+                                        @if (values[0] == "NaN") { values[0] = "0"; }
+                                        <span class="valor"><i class="far fa-star"></i>@values[0]</span>
+                                        <span class="opin">@values[1]</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="valor"><i class="far fa-star"></i>0</span>
+                                        <span class="opin">0</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        }
+    </div>
+
+}
+else
+{
+
+}
+

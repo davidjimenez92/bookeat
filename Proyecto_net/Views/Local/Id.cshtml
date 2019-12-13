@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewData["Title"] = "Id";
+}
+
+@if (ViewBag.local != null)
+{
+    var local = ViewBag.local;
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="local-titulo"><h1>@local.Nombre</h1></div>
+           
+                    @foreach (var item in local.Imagen)
+                    {
+                       
+                            <img class="img-local" src=@item.Url alt=@local.Nombre />
+                        
+                    }
+               
+            <div class="mt-4 local-menu">
+                <h3>Menú</h3>
+                @if (ViewBag.menu != null)
+                {
+                    foreach (var lineaMenu in ViewBag.menu)
+                    {
+                        <div class="linea-menu">
+                            <span class="menu-nombre">@lineaMenu.Nombre</span>
+                            <span class="menu-precio">@Math.Round(@lineaMenu.Precio, 2) €</span>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 local-reserva">
+            <div class="card-local-reserva">
+                <div class="row">
+                    <div class="col-9">
+                        <div><span class="local-categoria">@local.Categoria</span></div>
+                        <div><span class="local-nombre">@local.Nombre</span></div>
+                        <div><span class="local-direccion">@local.Direccion, @local.CPostal</span></div>
+                        <div><span class="local-direccion">@local.Barrio</span></div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button class="btn btn-reserva" id="reserva-button-abrir">Reservar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+        if (Context.Request.Cookies["user_type"] != "local")
+        {
+            @await Html.PartialAsync("../Reserva/_RealizarReserva");
+        }
+        @section scripts {
+            <script type="text/javascript">
+            $(document).on("click", "#reservar-pedido-siguiente", function () {
+
+                if ($('#takeaway').is(':checked')) {
+                    var val = '@ViewBag.userEmail';
+                    if (val != "") {
+                        $('#reservar-modal-pedido').modal('hide');
+                        $('#reservar-modal-confirmar').modal('show');
+                    }
+                    else {
+                        $('#reservar-modal-pedido').modal('hide');
+                        $('#reservar-modal-login').modal('show');
+                    }
+                }
+                else {
+                    $.ajax({
+                        type: "GET",
+                        url: "/Reserva/comprobarMesas/",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: {
+                        dia: $("#datepicker").datepicker({ dateFormat: 'dd,MM,yyyy' }).val(),
+                        hora: $("#seleccionarHora").val(),
+                        idlocal: '@ViewBag.local.Idlocal'
+
+        },
+                        success: function (result, status, xhr) {
+                            if (result != null) {
+                                $('#seleccionarMesa').find('option').remove().end();22
+                                $.each(result, function(index, value) {$('#seleccionarMesa').append($("<option></option>").attr("value", JSON.stringify(value.idmesa)).text("Mesa: "+JSON.stringify(value.numeroMesa) + " - Capacidad: "+JSON.stringify(value.capacidad)));});
+
+                                $('#reservar-modal-pedido').modal('hide');
+                                $('#reservar-modal-mesa').modal('show')
+                            }
+                            else {
+
+                                $('#reservar-modal-pedido').modal('hide');
+                                $('#reservar-modal-mesa').modal('show')
+                            }
+                        }
+                    })
+                }
+            });
+
+            //abre el modal para reservar
+$(document).on("click", "#reserva-button-abrir", function () {
+    //abre el  para seleccionar fecha
+    $('#reservar-modal-fecha').modal('show');
+});
+
+//modal seleccionar fecha
+$(document).on("click", "#reservar-fecha-siguiente", function () {
+
+    $('#reservar-modal-fecha').modal('hide');
+    $('#reservar-modal-hora').modal('show');
+});
+
+
+$(function () {
+    $("#datepicker").datepicker({ minDate: 0, maxDate: "+2M" });
+});
+
+//modal seleccionar hora
+$(document).on("click", "#reservar-hora-anterior", function () {
+    $('#reservar-modal-hora').modal('hide');
+    $('#reservar-modal-fecha').modal('show');
+});
+
+$(document).on("click", "#reservar-hora-siguiente", function () {
+    $('#reservar-modal-hora').modal('hide');
+    $('#reservar-modal-pedido').modal('show');
+});
+
+//modal seleccionar pedido
+$(document).on("click", "#reservar-pedido-anterior", function () {
+    $('#reservar-modal-pedido').modal('hide');
+    $('#reservar-modal-hora').modal('show');
+});
+
+//modal reservar mesa
+$(document).on("click", "#reservar-mesa-anterior", function () {
+    $('#reservar-modal-mesa').modal('hide');
+    $('#reservar-modal-pedido').modal('show');
+});
+
+$(document).on("click", "#reservar-mesa-siguiente", function () {
+    var val = '@ViewBag.userEmail';
+                    if (val != "") {
+                        $('#reservar-modal-mesa').modal('hide');
+                        $('#reservar-modal-confirmar').modal('show');
+                    }
+                    else {
+
+                                $('#reservar-modal-mesa').modal('hide');
+                                $('#reservar-modal-login').modal('show');
+
+    }
+});
+
+
+
+//modal reservar login
+$(document).on("click", "#reservar-login-anterior", function () {
+    $('#reservar-modal-login').modal('hide');
+    $('#reservar-modal-pedido').modal('show');
+});
+
+$(document).on("click", "#reservar-login-siguiente", function () {
+        $.ajax({
+            type: "GET",
+            url: "/Reserva/comprobarLogin/",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+            email: $("#reservar-loginform-email").val(),
+            password: $("#reservar-loginform-password").val()
+
+        },
+            success: function (result, status, xhr) {
+                if (result != 0) {
+                        $('#reservar-modal-login').modal('hide');
+                        $('#reservar-modal-confirmar').modal('show');
+                }
+                //else alert("contraseña incorrecta");
+            }, error: function (xhr, status, error) { $("#dbData").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText) }
+        });
+});
+
+//modal confirmar
+$(document).on("click", "#reservar-confirmar-anterior", function () {
+    $('#reservar-modal-confirmar').modal('hide');
+    if ($('#takeaway').is(':checked')) {
+        $('#reservar-modal-pedido').modal('show');
+    } else {$('#reservar-modal-mesa').modal('show');}
+});
+
+            $(document).on("click", "#reservar-confirmar", function () {
+
+                if ($('#takeaway').is(':checked')) { var mesa = 0 } else {var mesa = $("#seleccionarMesa option:selected").val()}
+        $.ajax({
+            type: "GET",
+            url: "/Reserva/crearReserva/",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+            dia: $("#datepicker").datepicker({ dateFormat: 'dd,MM,yyyy' }).val(),
+            hora: $("#seleccionarHora").val(),
+                menu: $("#seleccionarMenu").val(),
+            mesa: mesa,
+            email: $("#reservar-loginform-email").val(),
+            password: $("#reservar-loginform-password").val(),
+            cantidad: $("#cantidad").val(),
+                idlocal: '@ViewBag.local.Idlocal',
+
+        },
+            success: function (result, status, xhr) {
+                if (result != null) {
+                    $('#reservar-modal-confirmar').modal('hide');
+                }
+                //else alert(result);
+            }, error: function (xhr, status, error) { $("#dbData").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText) }
+        });
+});
+            </script>
+        }
+    }
+    else { }

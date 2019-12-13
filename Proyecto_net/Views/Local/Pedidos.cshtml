@@ -1,0 +1,32 @@
+﻿
+
+
+@if (ViewBag.Reserva != null)
+{
+    foreach (var a in ViewBag.Reserva)
+    {
+        @a.IdusuarioNavigation.Correo;
+        <br />
+        @a.Fecha;
+        <br />
+        @if (a.Idmesa != null)
+        {@Html.Raw("Mesa: ") @a.IdmesaNavigation.numeroMesa;
+    }
+
+    else
+    { @Html.Raw("TakeAway")}
+        <br />
+        foreach (var p in a.Pedido)
+        {
+
+            foreach (var pedido in p.ProductoPedido)
+            {
+                @Html.Raw("Menú: ") @pedido.IdproductoNavigation.Nombre;
+                <br />
+            }
+            @Html.Raw("Cantidad: ") @p.Cantidad;
+            <br />
+            <br />
+        }
+    }
+}

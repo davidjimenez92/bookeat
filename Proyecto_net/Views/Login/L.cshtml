@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "L";
+}
+
+@if (ViewBag.local != null)
+{
+    <form action="/Login/L2">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="nombreForm" value=@ViewBag.local.Nombre>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="passwordForm" value=@ViewBag.local.Pw>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="correoForm" value=@ViewBag.local.Correo>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Telefono</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="telefonoForm" value=@ViewBag.local.Telefono>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Direccion</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="direccionForm" value=@ViewBag.local.Direccion>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">CPostal</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="cpostalForm" value=@ViewBag.local.CPostal>
+        </div>
+
+        @if (ViewBag.menu != null)
+        {
+            <label for="exampleInputPassword1">Menú</label>
+            foreach (var a in ViewBag.menu)
+            {
+                <div class="form-group" id="menues">
+                    <input type="text" class="form-control" id="exampleInputPassword1" value=@a.Nombre>
+                    <input type="text" class="form-control" id="exampleInputPassword1" value=@a.Precio>
+                </div>
+            }
+        }
+        <button type="submit" class="btn btn-primary">Actializar datos</button>
+    </form>
+    <div class="form-group" id="anadirMenu">
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre del menú">
+        <input type="text" class="form-control" id="precio" placeholder="Precio">
+        <button id="crearMenuBtn"  class="btn btn-primary">Crear Menu</button>
+    </div>
+
+    <div class="form-group" id="anadirMenu">
+        <input type="text" class="form-control" id="capacidad" placeholder="Capacidad de la mesa">
+        <button id="crearMesaBtn"  class="btn btn-primary">Crear Mesa</button>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).on("click", "#crearMenuBtn", function () {
+            $.ajax({
+                type: "GET",
+                url: "/Local/crearMenu/",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: {
+                    nombre: $("#nombre").val(),
+                    precio: $("#precio").val()
+                },
+                success: function (result, status, xhr) {
+                    if (result == true) {
+                        alert("true")
+                    }
+                    else {
+                        alert("false");
+
+                    }
+                }
+            })
+
+        });
+
+        $(document).on("click", "#crearMesaBtn", function () {
+            $.ajax({
+                type: "GET",
+                url: "/Local/crearMesa/",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: {
+                    capacidad: $("#capacidad").val()
+                },
+                success: function (result, status, xhr) {
+                    if (result == true) {
+                        alert("true")
+                    }
+                    else {
+                        alert("false");
+
+                    }
+                }
+            })
+
+        });
+
+    </script>
+}

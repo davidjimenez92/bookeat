@@ -1,0 +1,420 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+@font-face {
+    font-family: Gotham-Black;
+    font-weight: 700;
+    src: url('../lib/fonts/GothamNarrow-Black.otf');
+}
+@font-face {
+    font-family: Gotham-Book;
+    font-weight: 400;
+    src: url('../lib/fonts/GothamNarrow-Book.otf');
+}
+@font-face {
+    font-family: Gotham-Thin;
+    font-weight: 100;
+    src: url('../lib/fonts/GothamNarrow-Thin.otf');
+}        
+
+
+body{
+    font-family: Gotham-Black;
+    color: #134153;
+    font-weight: 100;
+}
+
+
+/* Provide sufficient contrast against white background */
+a {
+  color: black;
+}
+a:hover{
+    text-decoration: none;
+}
+/*BOTONES*/
+.btn-primary {
+    color: #F2F2F2;
+    background-color: #8C4646;
+    border-color: #403F3F;
+}
+.btn-primary:hover {
+    background-color: #8C4646;
+}
+.btn-modal {   
+    color: #2E828B;
+    border: 6px solid #2E828B;
+    border-radius: 10px;
+    width: 100%;
+    font-family: Gotham-Black;
+    letter-spacing: 0.1em;
+}
+
+.btn-navbar-login {
+    background-color: transparent;
+    color: #2E828B;
+    font-family: Gotham-Black;
+    border: 6px solid #2E828B;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    width: 250px;
+    height: 55px;
+}
+.btn-navbar-login:hover {
+    color: #2E828B;
+}
+/*BOTONES*/
+/*NAVBAR*/
+header{
+    margin-bottom: 30px;
+}
+header nav {
+    background-color: white;
+}
+.navbar-brand {
+    font-family: Gotham-Book;
+    color: #2E828B;
+    font-size: 1.5rem;
+}
+
+.logoNavbar{
+    height: 200px;
+    width: 200px;
+}
+#inBuscarCiudad {
+    font-family: Gotham-Book;
+    width: 100%;
+    border: 6px solid #2E828B;
+    border-radius: 10px;
+    height: 55px;
+}
+.formBuscador{
+    width:250px;
+}
+.navbar-toggler-icon {
+    font-size: 2rem;
+    color: #134153;
+}
+
+.icono-oculto {
+    display: block;
+    margin: 0 auto;
+}
+
+.icono-principal {
+    display: none;
+}
+#btn-arriba{
+    display: none;
+}
+/*NAVBAR*/
+
+.dropdown-menu {
+    text-align: right;
+    border: 6px solid #2E828B;
+    border-radius: 10px;
+    color: #2E828B;
+    background-color: #FCFAF1;
+    width: 100%;
+}
+.dropdown-item {
+    color: #2E828B;
+}
+.dropdown-item:hover {
+    background-color: #8AD8ED;
+    color: #2E828B;
+}
+
+#inBuscarRestaurante {
+    font-family: Gotham-Book;
+    width: 100%;
+    border: 6px solid #8AD8ED;
+    border-radius: 10px;
+    height: 48px;
+}
+/*LOGIN*/
+.titulo-modal {
+    font-family: Gotham-Black;
+    font-size: 1.5em;
+    color: #134153;
+}
+.atras {
+    float: left;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+}
+.atras:hover { 
+    color: #000;
+    text-decoration: none;
+    opacity: .75;
+}
+.containerModal{
+    margin-bottom: 10px;
+}
+/*LOGIN*/
+/*RESERVA*/
+.modal-datepick{
+    display: block;
+    margin: 0 auto;
+}
+/*VISTA LOCAL*/
+.linea-menu {
+    font-family: Gotham-Book;
+    display: flex;
+    justify-content: space-between;
+    line-height: 2.5em;
+}
+.img-local {
+    height: 300px;
+    border: 3px solid #134153;
+    border-radius: 10px;
+}
+.card-local-reserva {
+    font-family:Gotham-Book;
+    border-radius: 10px;
+    border: 3px solid #134153;
+    padding: 5px 15px 5px 15px;
+}
+.local-categoria{
+    text-transform: uppercase;
+}
+.local-nombre{
+    font-family: Gotham-Black;
+    font-size: 1.3rem;
+}
+.btn-reserva {
+    width: 100%;
+    height: 55px;
+    font-family: Gotham-Black;
+    text-transform: uppercase;
+    color: #2E828B;
+    border: 6px solid #2E828B;
+    border-radius: 10px;
+}
+
+    .btn-reserva:hover {
+        color: #2E828B;
+    }
+/*VISTA LOCAL*/
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #A69853;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+#seleccionarMenu option {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 75%;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+/*Login PopUp*/
+.btn-modal:hover {
+    color: #2E828B;
+}
+
+.modal-content {
+    border: 2px solid #2E828B;
+    border-radius: 6px;
+}
+.form-elegant .font-small {
+    font-size: 0.8rem;
+    border: 1px solid #2E828B;
+}
+
+.form-elegant .z-depth-1a {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+    box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+}
+
+.form-elegant .modal-header {
+    border-bottom: none;
+}
+
+.modal-dialog .form-elegant .btn .fab {
+    color: #2196f3 !important;
+}
+
+.form-elegant .modal-body, .form-elegant .modal-footer {
+    font-weight: 400;
+}
+
+.modal-separator:before {
+    background: #d4d4d7;
+    content: "";
+    display: block;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 0;
+}
+
+.modal-separator {
+    position: relative;
+    text-align: center;
+    padding: 16px 0;
+}
+
+.errorLogin{
+    color: #902E2E;
+    font-family: Gotham-Black;
+}
+/*CARDS DE RESTAURANTES*/
+.card-local {
+    background-color: #FCFAF1;
+    border-radius: 10px;
+    border: 3px solid #2E828B;
+    min-width: 271px;
+    max-width: 390px;
+    height: 420px;
+}
+.card-local-image-holder {
+    height: 270px;
+    padding: 4px 4px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-local-image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+}
+.card-local-info {
+    display: flex;
+    flex-direction: column;
+    font-family: Gotham-Book;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 16px 0 12px;
+    color: #134153;
+}
+
+.card-local-info-nombre{
+    font-family: Gotham-Black;
+    font-size: 1.50rem;
+    color: #253238;
+    margin: 5px 0 5px;
+}
+
+.card-local-info-barrio {
+    color: #253238;
+    font-size: 1rem;
+    line-height: 22px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.card-local-info-valoracion {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-local-info-valoracion span.valor {
+    color: goldenrod;
+    font-family: Gotham-Black;
+}
+
+.card-local-info-valoracion span.opin {
+    font-weight: 500;
+}
+
+/*INPUT MODAL*/
+.input-modal{
+    font-family: Gotham-Book;
+    width: 100%;
+    height: 48px;
+    border: 6px solid #8AD8ED;
+    border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+    #navbar-items {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+@media (max-width:767px){
+    #btnLogin{
+        width: 100%;
+    }
+    #inBuscarCiudad{
+        width: 100%;
+        height:55px;
+    }
+    #inBuscarRestaurante{
+        width: 100%;
+        margin-left:0px;
+    }
+    .navbar{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+}
+@media (min-width: 768px){
+    header nav{
+        height: 140px;
+    }
+    .icono-oculto{
+        display: none;
+    }
+    .icono-principal{
+        display: block;
+    }
+}

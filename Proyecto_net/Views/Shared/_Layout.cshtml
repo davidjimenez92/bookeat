@@ -1,0 +1,80 @@
+﻿@{ViewBag.userEmail = Context.Request.Cookies["user_email"]; ViewBag.userId = Context.Request.Cookies["user_id"]; ViewBag.userType = Context.Request.Cookies["user_type"];}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]bookeat</title>
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+<body>
+    <header>
+        
+        <nav class="navbar navbar-expand-md">
+            <div class="navbar-icon icono-oculto text-center">
+                <a href="/" class="navbar-brand"><img class="logoNavbar" src="~/lib/img/logo/book eat LOGO FINAL-02.svg" /></a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" id="btn-abajo"><i class="fas fa-chevron-down"></i></span>
+                <span class="navbar-toggler-icon" id="btn-arriba"><i class="fas fa-chevron-up"></i></span>
+            </button>
+            <div class="collapse navbar-collapse ml-4 mr-4" id="navbar-items">
+                <form class="form-inline my-2 my-md-0 formBuscador">
+                    <input class="form-control pull-right" type="text" id="inBuscarCiudad" placeholder="Buscar Distrito">
+                </form>
+                <div class="navbar-icon align-content-center icono-principal">
+                    <a href="/" class="navbar-brand"><img class="logoNavbar" src="~/lib/img/logo/book eat LOGO FINAL-02.svg" /></a>
+                </div>
+                @if (Context.Request.Cookies["user_email"] != null)
+
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-navbar-login dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @Context.Request.Cookies["user_nombre"]</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @if (Context.Request.Cookies["user_type"] == "usuario")
+                            {<a class="dropdown-item" href="/Perfil/">Modificar perfíl</a>}
+                            else if (Context.Request.Cookies["user_type"] == "local")
+                            {<a class="dropdown-item" href="/Local/Modificar">Modificar local</a>
+                                <a class="dropdown-item" href="/Local/Pedidos">Pedidos</a>}
+
+                            <a class="dropdown-item" href="#logout">Cerrar sesión</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    @await Html.PartialAsync("../Shared/_Login")
+                }
+
+            </div>
+        </nav>
+    </header>
+
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - Proyecto_net - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
